@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Read Book</title>
+</head>
+<body>
+    <h1>{{ book['title'] }}</h1>
+    <h2>{{ book['author'] }}</h2>
+    <p>{{ book['description'] }}</p>
+    <h3>Conteúdo</h3>
+    {% for page in book['content'] %}
+    <p>{{ page }}</p>
+    {% endfor %}
+    {% if book['id'] in purchased_books %}
+    <p>Parabéns! Você adquiriu este livro.</p>
+    {% else %}
+    <p>Por favor, realize o pagamento para acessar o conteúdo completo.</p>
+    <a href="/purchase/{{ book['id'] }}">Realizar Pagamento</a>
+    {% endif %}
+</body>
+</html>
+
