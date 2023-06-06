@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Read Book</title>
+</head>
+<body>
+    <h1>Read Book</h1>
+    <h2>{{ book['title'] }}</h2>
+    <p>Code: {{ book['code'] }}</p>
+    <p>Price: {{ book['price'] }}</p>
+    <h3>Content:</h3>
+    {% for page in book['content'] %}
+        <div class="page">
+            {% for line in page %}
+                <p>{{ line }}</p>
+            {% endfor %}
+        </div>
+        <hr>
+    {% endfor %}
+    <p><a href="/dashboard/{{ username }}">Back to Dashboard</a></p>
+</body>
+</html>
