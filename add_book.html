@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Book</title>
+</head>
+<body>
+    <h1>Adicionar Livro</h1>
+    <form method="POST" action="/add_book">
+        <label>Título:</label>
+        <input type="text" name="title"><br>
+        <label>Páginas:</label>
+        <input type="number" name="pages"><br>
+        <label>Código:</label>
+        <input type="text" name="code"><br>
+        <label>Preço:</label>
+        <input type="number" step="0.01" name="price"><br>
+        <label>Conteúdo:</label>
+        <textarea name="content"></textarea><br>
+        <input type="hidden" name="username" value="admin">
+        <input type="submit" value="Add">
+    </form>
+</body>
+</html>
