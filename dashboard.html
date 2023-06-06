@@ -2,6 +2,26 @@
 <html>
 <head>
     <title>Dashboard</title>
+    <script>
+        function sendNotification() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/send_notification", true);
+            xhr.setRequestHeader("Content-Type", "application/json");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert("Notificação enviada, aguarde a confirmação para poder ler o livro!");
+                }
+            };
+
+            var data = JSON.stringify({
+                username: "{{ username }}",
+                message: "Nova confirmação de pagamento!"
+            });
+
+            xhr.send(data);
+        }
+    </script>
 </head>
 <body>
     <h1>Bem vindo, {{ username }}!</h1>
@@ -28,13 +48,22 @@
             <input type="submit" value="Add">
         </form>
     {% else %}
-        <h2>Comprar livro</h2>
+        <h2>Buy Book</h2>
+        <!-- Formulário para comprar livro -->
         <form method="POST" action="/buy_book">
-            <label>Código:</label>
+            <label>Code:</label>
             <input type="text" name="code"><br>
             <input type="hidden" name="username" value="{{ username }}">
             <input type="submit" value="Buy">
         </form>
+        <button onclick="sendNotification()">Notify Admin</button>
     {% endif %}
+    <h2>Books</h2>
+    <ul>
+        {% for book in books %}
+            <li><a href="/read_book/{{ book['code'] }}">{{ book['title'] }}</a></li>
+        {% endfor %}
+    </ul>
+    <p><a href="/">Logout</a></p>
 </body>
 </html>
