@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Bem vindo, {{ username }}!</h1>
+    {% if success %}
+        <p style="color: green;">{{ success }}</p>
+    {% endif %}
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if username == 'admin' %}
+        <h2>Adicionar Livro</h2>
+        <form method="POST" action="/add_book">
+            <label>Título:</label>
+            <input type="text" name="title"><br>
+            <label>Páginas:</label>
+            <input type="number" name="pages"><br>
+            <label>Código:</label>
+            <input type="text" name="code"><br>
+            <label>Preço:</label>
+            <input type="number" step="0.01" name="price"><br>
+            <label>Conteúdo:</label>
+            <textarea name="content"></textarea><br>
+            <input type="hidden" name="username" value="{{ username }}">
+            <input type="submit" value="Add">
+        </form>
+    {% else %}
+        <h2>Comprar livro</h2>
+        <form method="POST" action="/buy_book">
+            <label>Código:</label>
+            <input type="text" name="code"><br>
+            <input type="hidden" name="username" value="{{ username }}">
+            <input type="submit" value="Buy">
+        </form>
+    {% endif %}
+</body>
+</html>
